@@ -44,7 +44,7 @@
 
         <div ng-switch-when="Issues" class="container">
              <div class="scroll_container" ng-show="!isIssuesEmpty()">
-                <div ng-repeat="issue in issues" class="content_item_container">
+                <div ng-repeat="issue in issues.data" class="content_item_container">
                     <a class="content_item" ng-href="#/issues/{{issue.id}}">{{issue.subject}}</a>
                 </div>
                 <div align="center">  

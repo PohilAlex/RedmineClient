@@ -7,7 +7,7 @@ angular.module('rcApp').factory('DataLoader', ['$location', function($location) 
 			if (entity == undefined) {
 				entity = {
 					offset : 0,
-					limit : 5,
+					limit : 20,
 					loadCount : -1,
 					totalCount : -1,
 					data : [],
@@ -21,6 +21,11 @@ angular.module('rcApp').factory('DataLoader', ['$location', function($location) 
 					loadMore : function() {
 						this.offset = this.offset + this.limit;
 	  					this.loadData();
+					},
+					onDataLoaded: function(loadData, total_count){
+						this.data = this.data.concat(loadData);
+						this.loadCount = this.data.length;
+						this.totalCount = total_count;		
 					}
 
 				}
@@ -29,11 +34,13 @@ angular.module('rcApp').factory('DataLoader', ['$location', function($location) 
 			return entity;
 		},
 
-		onDataLoaded : function(type, data) {
-			var entity = this.getEntityInstance(type);
-			entity.data = entity.data.concat(data.issues);
-			entity.loadCount = entity.data.length;
-			entity.totalCount = data.total_count;
+
+		clearInstance : function(type) {
+			var instance = this.getEntityInstance(type);
+			instance.offset = 0;
+			instance.loadCount = -1;
+			instance.totalCount = -1;
+			instance.data.length = 0;
 		}
 	}
 }]);
