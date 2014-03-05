@@ -1,0 +1,82 @@
+<div id="sp-nav" ng-controller="menuCtrl" class="menu">
+    <div>
+        <ul class="topcoat-list">
+            <li class="menu_item" ng-click="redirectToProfile()">Profile</li>
+            <li class="menu_item" ng-click="redirectToProject()">Projects</li>
+            <li class="menu_item" ng-click="redirectToIssue()">Issues</li>
+        </ul>
+    </div>
+</div>
+
+<div id="sp-page" class="content" >
+    <div class="nav_panel">
+        <a href back-button style="padding-right:20px"> <img src="img/back.png" widht="50mm" height="50mm"></a>
+        <a href="" ng-click="$spMenu.toggle()">
+            <img src="img/hamburger_dark.svg" widht="50mm" height="50mm">
+        </a>
+        {{title}}
+        <div >
+            <a class="topcoat-icon-button--quiet">
+                <span class="topcoat-icon topcoat-icon--edit"></span>
+            </a>
+        </div>
+    </div>
+    <div ng-switch on="section" class="container" >
+
+        <div ng-switch-when="Projects" class="container">
+            <div class="scroll_container" ng-show="!isProjectEmpty()">
+                <div ng-repeat="project in projects" class="content_item_container">
+                    <a class="content_item  " ng-href="#/projects/{{project.id}}">{{project.name}}</a>
+                </div> 
+                <div align="center">  
+                    <button ng-click="loadMoreProject()" ng-show="!isProjectLoad()">Load More</button>
+                    <!-- <img src="img/progress.gif" width="200px" height="200px"/> -->
+                </div>
+
+            </div>
+            <div align="center" ng-show="isProjectEmpty()" >
+                <img src="img/progress.gif"/>
+            </div>
+ 
+        </div>
+
+        <div ng-switch-when="Issues" class="container">
+             <div class="scroll_container" ng-show="!isIssuesEmpty()">
+                <div ng-repeat="issue in issues" class="content_item_container">
+                    <a class="content_item" ng-href="#/issues/{{issue.id}}">{{issue.subject}}</a>
+                </div>
+                <div align="center">  
+                    <button ng-click="loadMoreIssues()" ng-show="!isIssuesLoad()">Load More</button>
+                    <!-- <img src="img/progress.gif" width="200px" height="200px"/> -->
+                </div>
+
+            </div>
+            <div align="center" ng-show="isIssuesEmpty()" >
+                <img src="img/progress.gif"/>
+            </div>
+        </div>  
+
+        <div ng-switch-when="Profile">
+            <p>Name: {{profile.firstname + ' ' + profile.lastname}}</p>
+            <p>Mail: {{profile.mail}}</p>
+        </div>
+
+        <div ng-switch-when="IssueDetails" class="scroll_container" style="margin-bottom:100px">
+            <p>Subject: {{issue.subject}}</p>
+            <p>Description: {{issue.description}}</p>
+            <p>Autor: {{issue.author.name}}</p>
+            <p>Assigned to: {{issue.assigned_to.name}}</p>
+            <p>Status: {{issue.status.name}}</p>
+            <p>Priority: {{issue.priority.name}}</p>
+            <p>Spent time: {{issue.spent_hours}}h</p>
+            <p>Done ratio: {{issue.done_ratio}}%</p>
+            <p/>
+            <p><input type="text" ng-model="note.data"> {{note.data}}</p>
+            <button ng-click="addNote()">Add Note</button>
+        </div>
+
+        
+
+        <div ng-switch-default>default</div>
+    </div>
+</div>      

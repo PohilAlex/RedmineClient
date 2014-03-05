@@ -1,0 +1,72 @@
+.content {
+	background-color: #FFFFFF;
+	font-size: 16pt;
+	height: 100%;		
+	width:100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.menu {
+	overflow-x: hidden;
+	height: 100%;
+	background-color: #E3F6CE;
+}
+
+.menu_item {
+	padding: 20px;
+	font-size: 18pt;
+}
+
+.container{
+	height: 100%;
+	width:100%;
+    overflow-x: hidden;
+}
+
+.content_item {
+	font-size: 18pt;
+	border-bottom: 1px;	
+	text-decoration:none;
+	color: inherit;
+}
+
+.content_item_container {
+	padding: 15px;
+	border-bottom: solid 1px black; 
+	background-color: #CEECF5;
+}
+
+.scroll_container, 
+.scroll_hide_container {
+	overflow-y: auto;
+	overflow-x: hidden;
+ 	height: 92%;
+	width: 100%;
+}
+
+
+.nav_panel {
+    height: 8%;
+    width: 100%;
+}
+
+.login_container {
+	height: 100%;
+	width: 100%;
+	padding-left: 50px;	
+}
+
+.login_input {
+	margin: 50px;
+	font-size: 20pt;
+}
+
+.login_text {
+	font-size: 20pt;
+}
+
+.login_btn {
+	padding: 10px;
+	font-size: 18pt;
+}
