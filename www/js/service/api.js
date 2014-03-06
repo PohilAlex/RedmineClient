@@ -6,13 +6,8 @@ angular.module('rcApp').factory('Projects', ['$resource', function($resource){
 }]);
 
 angular.module('rcApp').factory('Issues', ['$resource', function($resource){
-	return $resource(host + '/issues.:format', {format: 'json'}, {
-		query: {method: 'GET', isArray: false}
-  })
-}]);
-
-angular.module('rcApp').factory('IssueDetails', ['$resource', function($resource){
 	return $resource(host + '/issues/:issueId.:format', {format: 'json'}, {
+		query: {method: 'GET', isArray: false},
 		update: {method : 'PUT'}	
   })
 }]);

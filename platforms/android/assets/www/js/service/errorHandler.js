@@ -11,4 +11,4 @@ angular.module('rcApp').factory('ApiErrorHandler', ['$location', function($locat
 	          }		
 		}
 	}
-}]);
+}]);	

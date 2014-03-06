@@ -1,6 +1,6 @@
 <div id="sp-nav" ng-controller="menuCtrl" class="menu">
     <div>
-        <ul class="topcoat-list">
+        <ul style="list-style-type: none;">
             <li class="menu_item" ng-click="redirectToProfile()">Profile</li>
             <li class="menu_item" ng-click="redirectToProject()">Projects</li>
             <li class="menu_item" ng-click="redirectToIssue()">Issues</li>
@@ -10,18 +10,11 @@
 
 <div id="sp-page" class="content" >
     <div class="nav_panel" ng-controller="menuCtrl">
-        <a href back-button style="padding-right:20px" ng-show="backVisible()">
-            <img src="img/back.png" widht="50mm" height="50mm">
-        </a>
-        <a href="" ng-click="$spMenu.toggle()">
-            <img src="img/hamburger_dark.svg" widht="50mm" height="50mm">
-        </a>
-        {{title}}
-        <div >
-            <a class="topcoat-icon-button--quiet">
-                <span class="topcoat-icon topcoat-icon--edit"></span>
-            </a>
-        </div>
+        <img src="img/back.png" widht="50mm" height="50mm" back-button style="padding-right:20px" ng-show="backVisible()">
+        <img src="img/hamburger_dark.svg"  ng-click="$spMenu.toggle()" widht="50mm" height="50mm">
+
+        <span class="nav_title">{{title}}</span>
+       
     </div>
     <div ng-switch on="section" class="container" >
 
@@ -58,23 +51,31 @@
             </div>
         </div>  
 
-        <div ng-switch-when="Profile">
-            <p>Name: {{profile.firstname + ' ' + profile.lastname}}</p>
-            <p>Mail: {{profile.mail}}</p>
+        <div ng-switch-when="Profile" class="scroll_container issue_detail_container">
+            <div style="height:50px"></div>
+            <span class="issue_detail_category">Name: </span> <span class="issue_detail_value">{{profile.firstname + ' ' + profile.lastname}}</span> </br>
+            <span class="issue_detail_category">Mail:</span><span class="issue_detail_value"> {{profile.mail}}</span> </br>
         </div>
+         <div ng-switch-when="IssueDetails" class="container">
 
-        <div ng-switch-when="IssueDetails" class="scroll_container" style="margin-bottom:100px">
-            <p>Subject: {{issue.subject}}</p>
-            <p>Description: {{issue.description}}</p>
-            <p>Autor: {{issue.author.name}}</p>
-            <p>Assigned to: {{issue.assigned_to.name}}</p>
-            <p>Status: {{issue.status.name}}</p>
-            <p>Priority: {{issue.priority.name}}</p>
-            <p>Spent time: {{issue.spent_hours}}h</p>
-            <p>Done ratio: {{issue.done_ratio}}%</p>
-            <p/>
-            <p><input type="text" ng-model="note.data"> {{note.data}}</p>
-            <button ng-click="addNote()">Add Note</button>
+            <div class="scroll_container issue_detail_container" ng-show="isIssueDetailsLoad()">
+                <div style="height:50px"></div>
+                <span class="issue_detail_category">Subject:</span> <span class="issue_detail_value">{{issue.subject}}</span> </br>
+                <span class="issue_detail_category">Autor:</span><span class="issue_detail_value"> {{issue.author.name}}</span> </br>
+                <span class="issue_detail_category">Assigned to:</span><span class="issue_detail_value"> {{issue.assigned_to.name}}</span> </br>
+                <span class="issue_detail_category">Status:</span><span class="issue_detail_value">{{issue.status.name}}</span> </br>
+                <span class="issue_detail_category">Priority:</span><span class="issue_detail_value">{{issue.priority.name}}</span> </br>
+                <span class="issue_detail_category">Spent time:</span><span class="issue_detail_value">{{issue.spent_hours}}h</span> </br>
+                <span class="issue_detail_category">Done ratio:</span><span class="issue_detail_value">{{issue.done_ratio}}%</span> </br>
+
+                <p style="padding:20px">{{issue.description}}</p>
+                <p/>
+                <p><input class="issue_detail_note_input" type="text" ng-model="note.data"></p>
+                <button class="issue_detail_note_btn" ng-click="addNote()">Add Note</button>
+            </div>
+             <div align="center" ng-show="!isIssueDetailsLoad()" >
+                <img src="img/progress.gif"/>
+            </div>
         </div>
 
         

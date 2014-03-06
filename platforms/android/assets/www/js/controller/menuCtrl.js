@@ -1,5 +1,5 @@
-angular.module('rcApp').controller('menuCtrl', ['$scope', '$location', '$spMenu',
-  function ($scope, $location, $spMenu) {
+angular.module('rcApp').controller('menuCtrl', ['$scope', '$location', '$spMenu', 'Navigation',
+  function ($scope, $location, $spMenu, Navigation) {
     $scope.redirectToProfile = function() {
       $location.path('/profile');
       $spMenu.hide();
@@ -11,5 +11,8 @@ angular.module('rcApp').controller('menuCtrl', ['$scope', '$location', '$spMenu'
     $scope.redirectToIssue = function() {
       $location.path('/issues');
       $spMenu.hide();
+    }
+    $scope.backVisible = function() {
+      return !Navigation.isEmpty();
     }
   }]);

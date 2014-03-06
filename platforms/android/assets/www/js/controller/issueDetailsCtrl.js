@@ -1,5 +1,6 @@
-angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$routeParams', 'IssueDetails', 'ApiErrorHandler',
-	function ($scope, $http, $routeParams, IssueDetails, ApiErrorHandler) {
+angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$routeParams', '$location', 'IssueDetails', 'ApiErrorHandler', 'Navigation',
+	function ($scope, $http, $routeParams, $location, IssueDetails, ApiErrorHandler, Navigation) {
+		Navigation.add($location.url());
 		$scope.section='IssueDetails';
 		$scope.note = {data : ""};
 	  	var api_key = JSON.parse(localStorage.getItem('user')).api_key;
@@ -25,5 +26,8 @@ angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$rou
 					ApiErrorHandler.handle(httpResponse);
 				});
 		};
+		$scope.isIssueDetailsLoad = function() {
+			return $scope.issue != undefined;
+		}
 
   }]);

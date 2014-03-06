@@ -1,54 +1,47 @@
-var issueUrl = 'http://crm.mlsdev.com/issues.json'
-var issuesOffset = 0;
-var issuesLimit = 20;
-var issuesLoadCount = 0;
-var issuesTotalCount = 0;
-var projectId;
+    var projectId;  
 
-angular.module('rcApp').controller('issuesCtrl', ['$scope', '$rootScope', '$http', '$routeParams', 'Issues', 'ApiErrorHandler',
-	function ($scope, $rootScope, $http, $routeParams, Issues, ApiErrorHandler) {
-  	var currentProjectId = $routeParams.projectId;
-  	if (projectId != currentProjectId) {
-      issuesTotalCount = 0;
-  		issuesLoadCount = 0;
-  		issuesOffset = 0;
-  	}
-    projectId = currentProjectId;
-	 
+angular.module('rcApp').controller('issuesCtrl', ['$scope', '$rootScope', '$http', '$routeParams', '$location','Issues', 'ApiErrorHandler', 'Navigation', 'DataLoader',
+	function ($scope, $rootScope, $http, $routeParams, $location, Issues, ApiErrorHandler, Navigation, DataLoader) {
+    Navigation.add($location.url());
     $scope.title = 'Issues';
     $scope.section = 'Issues';
-  	
-  	$scope.issues = [];
-  	loadIssuesData();
-  	
-  	$scope.isIssuesEmpty = function() {
-  		return $scope.issues.length == 0;
-  	}
+    $scope.issues = DataLoader.getEntityInstance('issue');
 
-    $scope.isIssuesLoad = function() {
-      return issuesTotalCount == issuesLoadCount;
+    var currentProjectId = $routeParams.projectId;
+    if (projectId != currentProjectId) {
+      DataLoader.clearInstance('issue');
     }
+    projectId = currentProjectId;
 
-  	$scope.loadMoreIssues = function() {
-  		issuesOffset = issuesOffset + issuesLimit;
-  		loadIssuesData();
-  	};
-
-  	function loadIssuesData() {
+    $scope.issues.loadData = function() {
       var api_key = JSON.parse(localStorage.getItem('user')).api_key;   
-  		var params = {'key':api_key, 'project_id': projectId/*, 'assigned_to_id':'me'*/, 'status_id': '*', 'offset': issuesOffset, 'limit': issuesLimit}
+      var params = {'key':api_key, 'project_id': projectId, 'status_id': '*', 'offset': $scope.issues.offset, 'limit': $scope.issues.limit}
       var data = Issues.query(params, 
         function() {
-          $scope.issues = $scope.issues.concat(data.issues);
-          issuesLoadCount = $scope.issues.length;
-          issuesTotalCount = data.total_count;
+          $scope.issues.onDataLoaded(data.issues, data.total_count);
           if (projectId != undefined) {
             $scope.title = data.issues[0].project.name;
           }
         },
         function(httpResponse) {
           ApiErrorHandler.handle(httpResponse);
-        });
-  	}
+        });     
+    }
+
+  	 if ($scope.issues.isEmpty()) {
+      $scope.issues.loadData();
+    }
+
+    $scope.isIssuesEmpty = function() {
+      return $scope.issues.isEmpty();
+    }
+
+    $scope.isIssuesLoad = function() {
+      return $scope.issues.isLoad();
+    }
+
+    $scope.loadMoreIssues = function() {
+      $scope.issues.loadMore();
+    };  
 
   }]);

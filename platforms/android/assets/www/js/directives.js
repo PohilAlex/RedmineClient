@@ -1,4 +1,4 @@
-angular.module('rcApp').directive('backButton', function(){
+angular.module('rcApp').directive('backButton', ['Navigation', function(Navigation){
     return {
       restrict: 'A',
  
@@ -6,9 +6,26 @@ angular.module('rcApp').directive('backButton', function(){
         element.bind('click', goBack);
  
         function goBack() {
-          history.back();
+          Navigation.back();
+          //history.back();
           scope.$apply();
         }
       }
     }
-});
+}]);
+
+angular.module('rcApp').directive('loadMoreBtn', ['Navigation', function(Navigation){
+    return {
+      
+      
+      link: function(scope, element, attrs) {
+        element.bind('click', goBack);
+        
+        function goBack() {
+          Navigation.back();
+          //history.back();
+          scope.$apply();
+        }
+      }
+    }
+}]);

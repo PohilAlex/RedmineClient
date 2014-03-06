@@ -13,3 +13,19 @@ angular.module('rcApp').directive('backButton', ['Navigation', function(Navigati
       }
     }
 }]);
+
+angular.module('rcApp').directive('loadMoreBtn', ['Navigation', function(Navigation){
+    return {
+      
+      
+      link: function(scope, element, attrs) {
+        element.bind('click', goBack);
+        
+        function goBack() {
+          Navigation.back();
+          //history.back();
+          scope.$apply();
+        }
+      }
+    }
+}]);
