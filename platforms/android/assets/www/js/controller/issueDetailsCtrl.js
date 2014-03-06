@@ -1,12 +1,12 @@
-angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$routeParams', '$location', 'IssueDetails', 'ApiErrorHandler', 'Navigation',
-	function ($scope, $http, $routeParams, $location, IssueDetails, ApiErrorHandler, Navigation) {
+angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$routeParams', '$location', 'Issues', 'ApiErrorHandler', 'Navigation',
+	function ($scope, $http, $routeParams, $location, Issues, ApiErrorHandler, Navigation) {
 		Navigation.add($location.url());
 		$scope.section='IssueDetails';
 		$scope.note = {data : ""};
 	  	var api_key = JSON.parse(localStorage.getItem('user')).api_key;
 	  	var issuesId = $routeParams.issuesId;
 
-		var data = IssueDetails.get({'key':api_key, 'issueId':issuesId}, 
+		var data = Issues.get({'key':api_key, 'issueId':issuesId}, 
 			function(){
 				$scope.issue = data.issue;
 				$scope.title = data.issue.subject;
@@ -18,7 +18,7 @@ angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$rou
 		
 		$scope.addNote = function() {
 			var newIssue = {'issue' : {'notes' : $scope.note.data}};
-			IssueDetails.update({'key':api_key, 'issueId':issuesId}, newIssue, 
+			Issues.update({'key':api_key, 'issueId':issuesId}, newIssue, 
 				function() {
 					alert('Success');
 				}, 

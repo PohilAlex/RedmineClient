@@ -81,6 +81,12 @@
 	font-size: 18pt;
 }
 
+.logout_btn {
+	margin: 50px;
+	padding: 10px;
+	width: 80%;
+}
+
 .issue_detail_container {
 	background-color:#ffebc1;
 }

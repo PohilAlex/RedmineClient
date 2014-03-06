@@ -55,6 +55,7 @@
             <div style="height:50px"></div>
             <span class="issue_detail_category">Name: </span> <span class="issue_detail_value">{{profile.firstname + ' ' + profile.lastname}}</span> </br>
             <span class="issue_detail_category">Mail:</span><span class="issue_detail_value"> {{profile.mail}}</span> </br>
+            <button class="logout_btn" ng-click="logout()">Log out</button>
         </div>
          <div ng-switch-when="IssueDetails" class="container">
 

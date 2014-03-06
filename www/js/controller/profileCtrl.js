@@ -4,4 +4,9 @@ angular.module('rcApp').controller('profileCtrl', ['$scope', '$location','Naviga
   	$scope.profile = JSON.parse(localStorage.getItem('user'));
 	$scope.section='Profile';
 	$scope.title='Profile';
+
+	$scope.logout = function() {
+		localStorage.setItem('user', undefined);		
+		$location.path('/');
+	}
   }]);
