@@ -62,7 +62,9 @@
 .login_container {
 	height: 100%;
 	width: 100%;
-	padding-left: 50px;	
+	margin-left: 50px;	
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 .login_input {
