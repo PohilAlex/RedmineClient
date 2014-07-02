@@ -1,6 +1,15 @@
 <div ng-controller="loginCtrl" class="login_container">
-	<p class="login_text">Login  </p><input class="login_input" id="login_input" type="text" ng-model="user.name"/>
-	<p class="login_text">Pasword </p> <input class="login_input" id="password_input" type="password" ng-model="user.pass"/> 
-	</br>
-    <button class="login_btn" ng-click="login()">Register</button>
+    <p class="login_text">Login </p><input class="login_input" id="login_input" type="text" ng-model="user.name"/>
+
+    <p class="login_text">Pasword </p> <input class="login_input" id="password_input" type="password"
+                                              ng-model="user.pass"/>
+    </br>
+
+    <button class="login_btn" ng-click="login()" ng-show="!isLoading()">Login</button>
+    <div align="center">
+    	<img src="img/progress.gif" ng-show="isLoading()"/>
+	</div>
+            
+
+    
 </div>

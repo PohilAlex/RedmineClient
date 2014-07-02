@@ -54,7 +54,7 @@
 }
 
 .nav_title {
-	vertical-align: middle;
+	vertical-align: top;
 	word-wrap: break-word;
 	text-overflow: ellipsis;
 }
@@ -62,7 +62,6 @@
 .login_container {
 	height: 100%;
 	width: 100%;
-	margin-left: 50px;	
 	overflow-y: hidden;
 	overflow-x: hidden;
 }
@@ -70,15 +69,18 @@
 .login_input {
 	width: 50%;
 	font-size: 20pt;
+	margin-left: 50px;
 }
 
 .login_text {
 	width: 100px;
 	font-size: 20pt;
+	margin-left: 50px;
 }
 
 .login_btn {
 	margin-top: 50px;
+	margin-left: 50px;
 	padding: 10px;
 	font-size: 18pt;
 }
@@ -94,9 +96,9 @@
 }
 
 .issue_detail_category {
-	width: 200px;
+	width: 140px;
 	font-weight:bold;
-	padding-left: 50px;
+	padding-left: 30px;
 	display: inline-block;
 	padding-bottom: 10px;
 }

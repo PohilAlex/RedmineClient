@@ -15,7 +15,7 @@ angular.module('rcApp').controller('issueDetailsCtrl', ['$scope', '$http', '$rou
 				ApiErrorHandler.handle(httpResponse);		
 			});
 
-		
+
 		$scope.addNote = function() {
 			var newIssue = {'issue' : {'notes' : $scope.note.data}};
 			Issues.update({'key':api_key, 'issueId':issuesId}, newIssue, 

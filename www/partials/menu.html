@@ -8,78 +8,84 @@
     </div>
 </div>
 
-<div id="sp-page" class="content" >
+<div id="sp-page" class="content">
     <div class="nav_panel" ng-controller="menuCtrl">
-        <img src="img/back.png" widht="50mm" height="50mm" back-button style="padding-right:20px" ng-show="backVisible()">
-        <img src="img/hamburger_dark.svg"  ng-click="$spMenu.toggle()" widht="50mm" height="50mm">
+        <img src="img/back.png" widht="50mm" height="50mm" back-button style="padding-right:20px"
+             ng-show="backVisible()">
+        <img src="img/hamburger_dark.svg" ng-click="$spMenu.toggle()" widht="50mm" height="50mm">
 
         <span class="nav_title">{{title}}</span>
-       
+
     </div>
-    <div ng-switch on="section" class="container" >
+    <div ng-switch on="section" class="container">
 
         <div ng-switch-when="Projects" class="container">
             <div class="scroll_container" ng-show="!isProjectEmpty()">
                 <div ng-repeat="project in projects.data" class="content_item_container">
                     <a class="content_item  " ng-href="#/projects/{{project.id}}">{{project.name}}</a>
-                </div> 
-                <div align="center">  
+                </div>
+                <div align="center">
                     <button ng-click="loadMoreProject()" ng-show="!isProjectLoad()">Load More</button>
                     <!-- <img src="img/progress.gif" width="200px" height="200px"/> -->
                 </div>
 
             </div>
-            <div align="center" ng-show="isProjectEmpty()" >
+            <div align="center" ng-show="isProjectEmpty()">
                 <img src="img/progress.gif"/>
             </div>
- 
+
         </div>
 
         <div ng-switch-when="Issues" class="container">
-             <div class="scroll_container" ng-show="!isIssuesEmpty()">
+            <div class="scroll_container" ng-show="!isIssuesEmpty()">
                 <div ng-repeat="issue in issues.data" class="content_item_container">
                     <a class="content_item" ng-href="#/issues/{{issue.id}}">{{issue.subject}}</a>
                 </div>
-                <div align="center">  
+                <div align="center">
                     <button ng-click="loadMoreIssues()" ng-show="!isIssuesLoad()">Load More</button>
                     <!-- <img src="img/progress.gif" width="200px" height="200px"/> -->
                 </div>
 
             </div>
-            <div align="center" ng-show="isIssuesEmpty()" >
+            <div align="center" ng-show="isIssuesEmpty()">
                 <img src="img/progress.gif"/>
             </div>
-        </div>  
+        </div>
 
         <div ng-switch-when="Profile" class="scroll_container issue_detail_container">
             <div style="height:50px"></div>
             <span class="issue_detail_category">Name: </span> <span class="issue_detail_value">{{profile.firstname + ' ' + profile.lastname}}</span> </br>
-            <span class="issue_detail_category">Mail:</span><span class="issue_detail_value"> {{profile.mail}}</span> </br>
+            <span class="issue_detail_category">Mail:</span><span
+                class="issue_detail_value"> {{profile.mail}}</span> </br>
             <button class="logout_btn" ng-click="logout()">Log out</button>
         </div>
-         <div ng-switch-when="IssueDetails" class="container">
+        <div ng-switch-when="IssueDetails" class="container">
 
             <div class="scroll_container issue_detail_container" ng-show="isIssueDetailsLoad()">
                 <div style="height:50px"></div>
-                <span class="issue_detail_category">Subject:</span> <span class="issue_detail_value">{{issue.subject}}</span> </br>
-                <span class="issue_detail_category">Autor:</span><span class="issue_detail_value"> {{issue.author.name}}</span> </br>
+                <span class="issue_detail_category">Subject:</span> <span
+                    class="issue_detail_value">{{issue.subject}}</span> </br>
+                <span class="issue_detail_category">Autor:</span><span
+                    class="issue_detail_value"> {{issue.author.name}}</span> </br>
                 <span class="issue_detail_category">Assigned to:</span><span class="issue_detail_value"> {{issue.assigned_to.name}}</span> </br>
-                <span class="issue_detail_category">Status:</span><span class="issue_detail_value">{{issue.status.name}}</span> </br>
+                <span class="issue_detail_category">Status:</span><span
+                    class="issue_detail_value">{{issue.status.name}}</span> </br>
                 <span class="issue_detail_category">Priority:</span><span class="issue_detail_value">{{issue.priority.name}}</span> </br>
                 <span class="issue_detail_category">Spent time:</span><span class="issue_detail_value">{{issue.spent_hours}}h</span> </br>
                 <span class="issue_detail_category">Done ratio:</span><span class="issue_detail_value">{{issue.done_ratio}}%</span> </br>
 
                 <p style="padding:20px">{{issue.description}}</p>
+
                 <p/>
+
                 <p><input class="issue_detail_note_input" type="text" ng-model="note.data"></p>
                 <button class="issue_detail_note_btn" ng-click="addNote()">Add Note</button>
             </div>
-             <div align="center" ng-show="!isIssueDetailsLoad()" >
+            <div align="center" ng-show="!isIssueDetailsLoad()">
                 <img src="img/progress.gif"/>
             </div>
         </div>
 
-        
 
         <div ng-switch-default>default</div>
     </div>
